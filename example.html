@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+  <meta charset="utf-8">
+  <title>When In Dom Example</title>
+</head>
+<body>
+
+  <!-- a lot of divs just for testing -->
+  <div></div>
+  <div></div>
+  <div></div>
+  <div></div>
+  <div></div>
+  <div></div>
+  <div></div>
+  <div></div>
+  
+  <div>
+      <div>
+          <div>
+              <div>
+                  <div>
+                      <div>
+                          <div>
+                              <div>
+                                  <div id="test"></div>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+  <div></div>
+  <div></div>
+  <div></div>
+  <div></div>
+  
+  
+  <script src="whenInDom.min.js" type="text/javascript"></script>
+  <script type="text/javascript">
+      var a = document.createElement('div');
+      var b = document.createElement('div');
+      var t1, t2;
+
+      var obs1 = new WhenInDOM(a, function () {
+          t2 = (new Date()).getTime();
+          a.appendChild(document.createTextNode('I got inserted into DOM. ' + 'Time from insertion to callback: ' + (t2 - t1) + "ms"));
+      });
+      
+      // insert div into another but not dom
+      setTimeout(function () {
+          b.appendChild(a);
+          b.appendChild(document.createTextNode('I am a div inserted into another div , but not to dom at once'));
+      }, 1000);
+      
+      // insert parent div to dom
+      setTimeout(function () {
+          document.getElementById('test').appendChild(b);
+          t1 = (new Date()).getTime();
+      }, 2000);
+      
+  </script>
+</body>
+</html>

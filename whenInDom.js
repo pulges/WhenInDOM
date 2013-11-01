@@ -46,7 +46,7 @@ var WhenInDOM = function (el, callback, observeEl) {
     
     this.crawl = function() {
         if (this.crawlEl && this.crawlEl.parentNode) {
-            if (this.crawlEl.parentNode === this.observeEl) {
+            if (this.crawlEl.parentNode === this.observeEl || this.crawlEl.parentNode.nodeType > 8) {
                 this.stop();
                 this.callback();
             } else {
